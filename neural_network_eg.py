@@ -33,3 +33,24 @@ prediction = model.predict(digit)
 print(prediction)              # probabilities for digits 0–9
 print(np.argmax(prediction))   # digit with highest probability
 print("Actual label:", test_labels[0])
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
+
+# Get predictions for all test images
+predictions = model.predict(test_images)
+predicted_labels = np.argmax(predictions, axis=1)
+
+# Generate confusion matrix
+cm = confusion_matrix(test_labels, predicted_labels)
+
+# Plot
+plt.figure(figsize=(10, 8))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=range(10), yticklabels=range(10))
+plt.xlabel('Predicted Label')
+plt.ylabel('True Label')
+plt.title('Confusion Matrix - MNIST Digit Classifier')
+plt.savefig('confusion_matrix.png', dpi=150, bbox_inches='tight')
+plt.show()
