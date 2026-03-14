@@ -1,0 +1,35 @@
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.datasets import mnist
+
+# Load the MNIST dataset
+(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+
+# Preprocess the data: flatten the images and normalize the pixel values
+train_images = train_images.reshape((train_images.shape[0], 28 * 28)).astype('float32') / 255
+test_images = test_images.reshape((test_images.shape[0], 28 * 28)).astype('float32') / 255
+
+# Build the model
+model = Sequential([
+    Dense(128, activation='relu', input_shape=(28 * 28,)),
+    Dense(10, activation='softmax')
+])
+
+# Compile the model
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# Train the model
+model.fit(train_images, train_labels, epochs=5)
+
+# Evaluate the model
+test_loss, test_acc = model.evaluate(test_images, test_labels)
+print(f"Test accuracy: {test_acc}")
+
+import numpy as np
+
+digit = test_images[0].reshape(1, 784)  # pick first test image, reshape for model
+prediction = model.predict(digit)
+print(prediction)              # probabilities for digits 0–9
+print(np.argmax(prediction))   # digit with highest probability
+print("Actual label:", test_labels[0])
