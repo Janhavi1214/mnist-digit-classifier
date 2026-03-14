@@ -19,7 +19,13 @@ performance on unseen test data.
 
 - **Optimizer:** Adam  
 - **Loss:** Sparse Categorical Crossentropy  
-- **Metric:** Accuracy  
+- **Metric:** Accuracy
+
+- ## 📉 Confusion Matrix
+
+![Confusion Matrix](confusion_matrix.png)
+
+The matrix shows per-digit classification performance across all 10,000 test samples.
 
 ## 📁 Project Structure
 
