@@ -27,6 +27,13 @@ performance on unseen test data.
 
 The matrix shows per-digit classification performance across all 10,000 test samples.
 
+## 🖼️ Sample Prediction
+
+![Sample Prediction](sample_prediction.png)
+
+- Title turns **green** if the prediction is correct ✅
+- Title turns **red** if the prediction is wrong ❌
+
 ## 📁 Project Structure
 
 mnist-digit-classifier/
