@@ -53,4 +53,23 @@ plt.xlabel('Predicted Label')
 plt.ylabel('True Label')
 plt.title('Confusion Matrix - MNIST Digit Classifier')
 plt.savefig('confusion_matrix.png', dpi=150, bbox_inches='tight')
-plt.show()
+plt.show()# Visualize a sample prediction
+def plot_sample_prediction(index):
+    img = test_images[index].reshape(28, 28)
+    digit = test_images[index].reshape(1, 784)
+    
+    prediction = model.predict(digit)
+    predicted_label = np.argmax(prediction)
+    actual_label = test_labels[index]
+    
+    plt.figure(figsize=(4, 4))
+    plt.imshow(img, cmap='gray')
+    plt.title(f"Predicted: {predicted_label}  |  Actual: {actual_label}",
+              fontsize=13,
+              color='green' if predicted_label == actual_label else 'red')
+    plt.axis('off')
+    plt.savefig('sample_prediction.png', dpi=150, bbox_inches='tight')
+    plt.show()
+
+# Call with any test index
+plot_sample_prediction(0)
